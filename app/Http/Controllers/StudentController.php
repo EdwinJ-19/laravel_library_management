@@ -26,9 +26,11 @@ class StudentController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $student_books = Book::orderBy("created_at","desc")->get();
+        $books = Book::orderBy("created_at","desc")->get();
+        return view('index.student',['books'=>$books]);
+        // $student_books = Student::orderBy("created_at","desc")->get();
         // $student_books = Book::orderBy("created_at","desc");
-        return view('index.student',['student_books'=>$student_books]);
+        // return view('index.home',['student_books'=>$student_books]);
     }
 
     /**
@@ -37,7 +39,9 @@ class StudentController extends Controller implements HasMiddleware
     public function create()
     {
         $get_books = Book::where('status', 'available')->get();
-        return view('index.allot', ['get_books' => $get_books]);
+        $student = Student::all();
+        return view("index.allot", ['get_books' => $get_books],['student'=>$student]);
+        // return view('index.allot',['student'=>$student]);
     }
 
     /**
@@ -78,7 +82,12 @@ class StudentController extends Controller implements HasMiddleware
      */
     public function show(Student $student)
     {
-        //
+        // $student = Student::all();
+        // return view('allot',['student'=>$student]);
+        // $alloted_books = $student->alloted_books();
+        // return view('index.allot',['alloted_books'=>$alloted_books]);
+        $student = Student::all();
+        return view('index.show',['student'=>$student]);
     }
 
     /**

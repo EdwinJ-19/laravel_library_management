@@ -14,7 +14,7 @@
     <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8">
         @foreach ($books as $book)
         <div class="mx-auto text-center border-solid border shadow-lg px-9 py-5">
-        <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->image}}" height="150" width="150" class="mx-auto">
+            <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->image}}" height="150" width="150" class="mx-auto">
             <h1 class="text-xl font-bold">{{$book->title}}</h1>
             <p>{{$book->author}}</p>
             <div>
@@ -38,8 +38,26 @@
         @endforeach
     </div>
 
-    <container>
-        <h1 class="text-center text-zinc-700 mt-6 text-xl font-bold">Alloted Books</h1>
-        <p class="text-center">Total Student Alloted for the books: "ALLOTED_BOOK_COUNT"</p>
-    </container>       
+    {{-- <container>
+        <h1 class="text-center text-zinc-700 mt-8 text-xl font-bold">Alloted Books</h1>
+        <p class="text-center">Total Student Alloted for the books: {{\App\Models\Student::count()}}</p>
+    </container>  
+    
+    <div>
+            <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8 mb-14">
+                @foreach ($student_books as $book)
+                    <div class="border-solid border shadow-xl px-9 py-5 text-center">
+                        <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->image}}" height="150" width="150" class="mx-auto">
+                    <h1 class="text-xl font-bold">{{$book->title}}</h1>
+                    <p>{{$book->author}}</p>
+                    <div>
+                        <h1 class="font-bold text-lg">Status:</h1><p>{{$book->r_status}}</p>
+                    </div>
+                    <div class="text-center text-xs font-light mt-3">
+                        <span>Book alloted at {{$book->created_at->diffForHumans()}}</span>
+                    </div>
+                    </div>
+                @endforeach
+            </div>
+    </div> --}}
 </x-layout>

@@ -6,7 +6,7 @@
     </div>
 
     <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8">
-        @foreach ($student_books as $book)
+        @foreach ($books as $book)
             <div class="mx-auto text-center">
                 <img src="https://picsum.photos/200" alt="" height="150" width="150" class="mx-auto">
                 <h1 class="text-xl font-bold">{{$book ->title}}</h1>
