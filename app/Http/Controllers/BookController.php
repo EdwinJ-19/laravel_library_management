@@ -87,10 +87,7 @@ class BookController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Book $book)
     {
-        $path = null;
-        if($request->hasFile('image')){
-            $path = Storage::disk('public')->put('books_image',$request->image);
-        }
+    
 
         $fields = $request->validate([
             'title' => ['required','max:225'],
@@ -104,8 +101,15 @@ class BookController extends Controller implements HasMiddleware
         if($request->hasFile('image')){
             //delete old image from storage
             if($book->image){
-                
+                Storage::disk('public')->delete($book->image);
             }
+
+            //Store new image in same destination
+            // $path = Storage::disk('images')->put('books_image','public',$request->image);
+            $path = $request->file('image')->store('books_image','public');
+
+            //update the image in $fields
+            $fields['image'] = $path;
         }
 
         $book->update($fields);

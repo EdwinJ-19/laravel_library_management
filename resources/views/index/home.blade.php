@@ -1,6 +1,9 @@
 <x-layout>
+
     <container>
-        <h1 class="text-center text-zinc-700 mt-6">Latest Books</h1>
+        <h1 class="ml-20 mt-8 font-bold text-2xl text-zinc-700">Welcome Teacher, {{Auth::user()->username}}.</h1>
+        <h1 class="text-center text-zinc-700 mt-6 text-xl font-bold">Latest Books</h1>
+        <p class="text-center">Total Books in the Library: {{\App\Models\Book::count()}}</p>
     </container>
 
     @if (session('success'))
@@ -11,10 +14,12 @@
     <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8">
         @foreach ($books as $book)
         <div class="mx-auto text-center border-solid border shadow-lg px-9 py-5">
-        <img src="{{asset('storage/'.$book->image)}}" alt="{{$book->image}}" height="150" width="150">
+        <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->image}}" height="150" width="150">
             <h1 class="text-xl font-bold">{{$book->title}}</h1>
             <p>{{$book->author}}</p>
-            <p>{{$book->status}}</p>
+            <div>
+                <h1 class="font-bold text-lg">Status:</h1><p>{{$book->status}}</p>
+            </div>
             <div class="text-center text-xs font-light mt-3">
                 <span>Book Uploaded at {{$book->created_at->diffForHumans()}}</span><br>
                 <span>Book Updated at {{$book->updated_at->diffForHumans()}}</span>
@@ -32,4 +37,9 @@
         </div>    
         @endforeach
     </div>
+
+    <container>
+        <h1 class="text-center text-zinc-700 mt-6 text-xl font-bold">Alloted Books</h1>
+        <p class="text-center">Total Student Alloted for the books: "ALLOTED_BOOK_COUNT"</p>
+    </container>       
 </x-layout>
