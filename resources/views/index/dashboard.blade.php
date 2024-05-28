@@ -4,6 +4,10 @@
         <p>Welcome Teacher, {{Auth::user()->username}}</p>
     </div>
 
+    <div class="mx-11 mt-5">
+        <a href="{{route('home')}}" class="block mb-2 text-xs text-blue-500">&larr; Go back to your home</a>
+    </div>
+    
     @if (session('success'))
         <p class="text-green-500 border-solid border shadow-xl mx-10 mt-5 p-5">{{session('success')}}</p>
     @else

@@ -13,7 +13,8 @@ class Student extends Model
         'name',
         'title',
         'author',
-        'status',
+        'r_status',
+        'publisher',
         'image',
     ];
 }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Student;
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
+// use App\Http\Requests\StoreStudentRequest;
+// use App\Http\Requests\UpdateStudentRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -24,7 +26,7 @@ class StudentController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $student_books = Book::all();
+        $student_books = Book::orderBy("created_at","desc")->get();
         // $student_books = Book::orderBy("created_at","desc");
         return view('index.student',['student_books'=>$student_books]);
     }
@@ -34,7 +36,8 @@ class StudentController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        //
+        $get_books = Book::where('status', 'available')->get();
+        return view('index.allot', ['get_books' => $get_books]);
     }
 
     /**
@@ -42,7 +45,32 @@ class StudentController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>['required','string'],
+            'title'=>['required'],
+            'author'=>['required'],
+            'publisher'=>['required'],
+            'r_status'=>['required','string'],
+            'image'=>['nullable','file','max:3000','mimes:jpg,png,webp,jpeg'],
+        ]);
+
+        $path = null;
+        if($request->hasFile('image')){
+            $path = Storage::disk('public')->put('student_books_image',$request->image);
+        }
+
+        Auth::user()->student()->create([
+            'name'=>$request->name,
+            'title'=>$request->title,
+            'author'=>$request->author,
+            'publisher'=>$request->publisher,
+            'r_status'=>$request->r_status,
+            'image'=>$path,
+        ]);
+
+        // dd('book alloted');
+
+        return redirect()->route('allot')->with('success','Book Alloted!');
     }
 
     /**
