@@ -27,4 +27,4 @@ Route::redirect('/','books');
 
 Route::resource('books',BookController::class);
 
-Route::resource('students',StudentController::class);
+Route::resource('/student',StudentController::class);

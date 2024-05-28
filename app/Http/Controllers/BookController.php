@@ -16,7 +16,7 @@ class BookController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('auth', except: ['index','store']),
+            new Middleware('auth', except: ['index','store','edit']),
         ];
     }
     /**

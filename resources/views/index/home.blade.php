@@ -1,7 +1,7 @@
 <x-layout>
 
     <container>
-        <h1 class="ml-20 mt-8 font-bold text-2xl text-zinc-700">Welcome Teacher, {{Auth::user()->username}}.</h1>
+        <h1 class="ml-20 mt-8 font-bold text-2xl text-black">Welcome Teacher, {{Auth::user()->username}}.</h1>
         <h1 class="text-center text-zinc-700 mt-6 text-xl font-bold">Latest Books</h1>
         <p class="text-center">Total Books in the Library: {{\App\Models\Book::count()}}</p>
     </container>
@@ -14,7 +14,7 @@
     <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8">
         @foreach ($books as $book)
         <div class="mx-auto text-center border-solid border shadow-lg px-9 py-5">
-        <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->image}}" height="150" width="150">
+        <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->image}}" height="150" width="150" class="mx-auto">
             <h1 class="text-xl font-bold">{{$book->title}}</h1>
             <p>{{$book->author}}</p>
             <div>
