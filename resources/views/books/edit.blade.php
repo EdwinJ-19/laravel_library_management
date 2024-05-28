@@ -4,8 +4,11 @@
     @else
         <p class="text-red-500">{{session('delete')}}</p>
     @endif
+    <div class="mx-11 mt-5">
+        <a href="{{route('home')}}" class="block mb-2 text-xs text-blue-500">&larr; Go back to your home</a>
+    </div>
     <div>
-        <div class="border-solid border shadow-2xl mx-10 mt-5 p-5">
+        <div class="border-solid border shadow-2xl mx-10 mt-1 p-5">
             <h1 class="text-zinc-700 text-center font-bold">Update your Book</h1>
             <form action="{{route('books.update',['book'=>$book->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
