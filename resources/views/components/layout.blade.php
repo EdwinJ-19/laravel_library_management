@@ -26,14 +26,15 @@
                             <img src="https://picsum.photos/200" alt="dp">
                         </button>
                         {{-- dropdown content --}}
-                        <div x-show="open" @click.outside="open-false" class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light">
+                        <div x-show="open" @click.outside="open-false" class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light px-2 py-1">
                             <p class="text-black pl-4 pr-8 py-2 mb-1 text-xs">{{Auth::user()->username}}</p>
                             @if (Auth::user()->role =='teacher')
-                                <a href="{{route('dashboard')}}" class="text-black hover:bg-slate-100 pl-4 pr-8 py-2 mb-1">Dashboard</a>
+                                <a href="{{route('dashboard')}}" class="text-black hover:bg-slate-100 px-2 my-1">Dashboard</a>
+                                <a href="{{route('allot')}}" class="text-black hover:bg-slate-100 px-2 my-1">Allot</a>
                             @endif                            
                             <form action="{{route('logout')}}" method="POST">
                                 @csrf
-                                <button class="text-black hover:bg-slate-100 pl-4 pr-8 py-2 mb-1">Logout</button>
+                                <button class="text-black hover:bg-slate-100 px-2 my-1">Logout</button>
                             </form>
                         </div>
                     </div>

@@ -18,6 +18,7 @@ Route::middleware('guest')->group(function(){
 
 Route::middleware('auth')->group(function(){
     // Route::post('/logout',[AuthController::class,'logout']);
+    Route::get('/allot',function(){return view('index.allot');})->name('allot');
     Route::get('/dashboard', function () {return view('index.dashboard');})->name('dashboard');
     Route::get('/student', function () {return view('index.student');})->name('student');
     Route::post('/logout',[AuthController::class,'logout'])->name('logout');
