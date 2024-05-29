@@ -39,7 +39,7 @@
                 </div>
             
                 <div class="mb-4">
-                    <label for="title">Book_Photo:</label>
+                    <label for="image">Book_Photo:</label>
                     <input type="file" name="image" id="image">
                 </div>
             

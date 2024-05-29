@@ -52,17 +52,20 @@ class BookController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => ['required','max:225'],
             'author'=>['required'],
             'publisher'=>['required'],
             'status'=>['required'],
-            'image'=>['nullable','file','max:5000','mimes:jpg,png,webp,jpeg'],
+            'image'=>['nullable','file','max:3000','mimes:jpg,png,webp,jpeg'],
         ]);
 
+        //store image if exists
         $path = null;
         if($request->hasFile('image')){
-            $path = Storage::disk('public')->put('books_image',$request->image);
+            $path= Storage::disk('public')->put('books_image', $request->image);
+            // dd($path);
         }
 
         Auth::user()->books()->create([
@@ -97,8 +100,6 @@ class BookController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Book $book)
     {
-    
-        $get_books = Book::where('status', 'available')->get();
 
         $fields = $request->validate([
             'title' => ['required','max:225'],

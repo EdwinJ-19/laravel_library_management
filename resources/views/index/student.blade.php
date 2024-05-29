@@ -8,7 +8,7 @@
     <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8">
         @foreach ($books as $book)
             <div class="mx-auto text-center">
-                <img src="https://picsum.photos/200" alt="" height="150" width="150" class="mx-auto">
+                <img src="{{asset('storage/'.$book->image)}}" alt="{{$book->title}}" class="mx-auto h-40 w-40 object-contain">
                 <h1 class="text-xl font-bold">{{$book ->title}}</h1>
                 <p>{{$book ->author}}</p>
                 <p><span class="font-bold text-lg">Status:-</span> {{$book ->status}}</p>
@@ -19,13 +19,13 @@
     <div>
         <div class="mt-10">
             <h1 class="font-bold text-zinc-700 text-xl text-center mb-3">Books Alloted</h1>
-            <p class="text-center mb-4">Total Books alloted to you: {{\App\Models\Book::count()}}</p>    
+            <p class="text-center mb-4">Total Books alloted to you: {{\App\Models\User::count('id') == \App\Models\Student::count('user_id')}}</p>    
         </div>
 
         <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8">
             @foreach ($student_books as $book)
             <div class="mx-auto text-center">
-                <img src="https://picsum.photos/200" alt="" height="150" width="150" class="mx-auto">
+                <img src="{{asset('storage/'.$book->image)}}" alt="{{$book->title}}" class="mx-auto h-40 w-40 object-contain">
                 <h1 class="text-xl font-bold">{{$book->title}}</h1>
                 <p class="text-md font-semibold">Alloted to {{$book->name}}</p>
                 <p>{{$book->author}}</p>

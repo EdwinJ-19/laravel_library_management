@@ -11,7 +11,7 @@
         <h1 class="text-zinc-700 text-center font-bold my-10">Update your Book</h1>
         <div class="flex items-center justify-around flex-wrap border-solid border shadow-2xl mx-10 mt-1 p-5">
             <div class="text-center border-solid border shadow-lg px-9 py-5">
-                <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->title}}" height="150" width="150" class="mx-auto">
+                <img src="{{asset('storage/'. $book->image)}}" alt="{{$book->title}}" class="mx-auto h-40 w-40 object-contain">
                 <h1 class="text-xl font-bold">{{$book->title}}</h1>
                 <p>{{$book->author}}</p>
                 <div>
