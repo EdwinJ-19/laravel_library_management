@@ -8,8 +8,21 @@
         <a href="{{route('home')}}" class="block mb-2 text-xs text-blue-500">&larr; Go back to your home</a>
     </div>
     <div>
-        <div class="border-solid border shadow-2xl mx-10 mt-1 p-5">
-            <h1 class="text-zinc-700 text-center font-bold">Update your Book</h1>
+        <h1 class="text-zinc-700 text-center font-bold my-10">Update your Book</h1>
+        <div class="flex items-center justify-around flex-wrap border-solid border shadow-2xl mx-10 mt-1 p-5">
+            <div class="text-center border-solid border shadow-lg px-9 py-5">
+                <img src="{{asset('public/books_image/'. $book->image)}}" alt="{{$book->title}}" height="150" width="150" class="mx-auto">
+                <h1 class="text-xl font-bold">{{$book->title}}</h1>
+                <p>{{$book->author}}</p>
+                <div>
+                    <h1 class="font-bold text-lg">Status:</h1><p>{{$book->status}}</p>
+                </div>
+                <div class="text-center text-xs font-light mt-3">
+                    <span>Book Uploaded at {{$book->created_at->diffForHumans()}}</span><br>
+                    <span>Book Updated at {{$book->updated_at->diffForHumans()}}</span>
+                </div>
+            </div>
+
             <form action="{{route('books.update',['book'=>$book->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -43,5 +56,9 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <div class="flex items-center justify-center my-10">
+            
     </div>
 </x-layout>

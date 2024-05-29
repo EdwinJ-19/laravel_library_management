@@ -43,7 +43,8 @@ class BookController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        // 
+        // $get_books = Book::where('status', 'available')->get();
+        // return view("index.allot", ['get_books' => $get_books]); 
     }
 
     /**
@@ -97,6 +98,7 @@ class BookController extends Controller implements HasMiddleware
     public function update(Request $request, Book $book)
     {
     
+        $get_books = Book::where('status', 'available')->get();
 
         $fields = $request->validate([
             'title' => ['required','max:225'],
@@ -122,7 +124,6 @@ class BookController extends Controller implements HasMiddleware
         }
 
         $book->update($fields);
-
         
         // Auth::user()->books()->update([
         //     'title'=>$request->title,
@@ -137,7 +138,6 @@ class BookController extends Controller implements HasMiddleware
 
 
         // dd('updated');
-
         return redirect('dashboard')->with('success','Book updated successfully!');
     }
 
