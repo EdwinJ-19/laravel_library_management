@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -27,7 +28,14 @@ class BookController extends Controller implements HasMiddleware
     {
         $books = Book::orderBy("created_at","desc")->get();
         // $books = Book::all();
-        return view('index.home',['books'=>$books]);
+        $user = Auth::user();
+        if($user->role =='teacher'){
+            // return view('index.home',['books'=>$books]);
+            return view('index.home',['books'=>$books]);
+        }else{
+            // return view('index.student',['books'=>$books]);
+            dd('You cannot get an access to ADMIN PAGE!');
+        }
     }
 
     /**

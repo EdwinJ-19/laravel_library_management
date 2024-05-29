@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use App\Models\Student;
 // use App\Http\Requests\StoreStudentRequest;
 // use App\Http\Requests\UpdateStudentRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -18,7 +20,7 @@ class StudentController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('auth', except: ['index','store','edit']),
+            new Middleware('auth', except: ['store','edit']),
         ];
     }
     /**
@@ -27,10 +29,17 @@ class StudentController extends Controller implements HasMiddleware
     public function index()
     {
         $books = Book::orderBy("created_at","desc")->get();
-        return view('index.student',['books'=>$books]);
-        // $student_books = Student::orderBy("created_at","desc")->get();
-        // $student_books = Book::orderBy("created_at","desc");
-        // return view('index.home',['student_books'=>$student_books]);
+        $student = Student::all();
+        return view('index.student',['books'=>$books],['student_books'=>$student]);
+        // $user = Auth::user();
+        // if($user->role =='student'){
+        //     // return view('index.home',['books'=>$books]);
+        //     return view('index.student',['books'=>$books],['student_books'=>$student]);
+        // }else{
+        //     // return view('index.home',['books'=>$books]);
+        //     dd('You cannot get an access to ADMIN PAGE'); 
+        // }
+
     }
 
     /**

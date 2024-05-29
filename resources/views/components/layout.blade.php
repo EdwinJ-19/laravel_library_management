@@ -17,8 +17,8 @@
                 <h1>Library Management</h1>
             </div>
             <div class="flex items-center gap-2">
-                <a href="{{route('home')}}" class="hover:bg-white hover:text-black transition-all ease-in-out px-4 py-1 rounded-md">Home</a>
                 @auth
+                <a href="{{route('home')}}" class="hover:bg-white hover:text-black transition-all ease-in-out px-4 py-1 rounded-md">Home</a>
                     {{-- dropdown menu --}}
                     <div class="relative grid place-items-center" x-data="{open:false}">
                         {{-- dropdown button --}}

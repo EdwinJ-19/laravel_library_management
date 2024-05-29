@@ -1,10 +1,17 @@
 <x-layout>
 
+    @guest
+    <h1 class="text-center text-zinc-700 mt-6 text-xl font-bold">Latest Books</h1>
+    <p class="text-center">Total Books in the Library: {{\App\Models\Book::count()}}</p>
+    @endguest
+    
+    @auth
     <container>
-        <h1 class="ml-20 mt-8 font-bold text-2xl text-black">Welcome Teacher, {{Auth::user()->username}}.</h1>
+        <h1 class="ml-20 mt-8 font-bold text-2xl text-black">Welcome Teacher, {{Auth::user()->username}}</h1>
         <h1 class="text-center text-zinc-700 mt-6 text-xl font-bold">Latest Books</h1>
         <p class="text-center">Total Books in the Library: {{\App\Models\Book::count()}}</p>
     </container>
+    @endauth
 
     @if (session('success'))
     <p class="text-green-500 border-solid border shadow-xl mx-10 mt-5 p-5">{{session('success')}}</p>
@@ -24,6 +31,8 @@
                 <span>Book Uploaded at {{$book->created_at->diffForHumans()}}</span><br>
                 <span>Book Updated at {{$book->updated_at->diffForHumans()}}</span>
             </div>
+
+            @auth
             <div class="flex items-center justify-between mt-3">
                 {{-- update post --}}
                 <a href="{{route('books.edit',['book'=>$book->id])}}" class="bg-green-500 text-white rounded-md px-2 py-1 text-md">Edit</a>
@@ -33,7 +42,8 @@
                     @method('DELETE')
                     <button class="bg-red-500 text-white px-2 py-1 text-md rounded-md">Delete</button>
                 </form>
-            </div>
+            </div>                
+            @endauth
         </div>    
         @endforeach
     </div>
