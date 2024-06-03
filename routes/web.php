@@ -30,4 +30,7 @@ Route::redirect('/','books');
 Route::resource('books',BookController::class);
 
 Route::resource('/student',StudentController::class);
-Route::get('/allot',[StudentController::class,'create'])->name('allot');
+// Route::get('/allot',[StudentController::class,'create'])->name('allot');
+Route::get('/allot_student',[AllotController::class,'showAllotForm'])->name('allot_student');
+// Route::get('/show_student',[AllotController::class,'showStudentView'])->name('show_student');
+// Route::get('/show_alloted_student_book',[AllotController::class,'studentAlloted'])->name('show_alloted_student_book');

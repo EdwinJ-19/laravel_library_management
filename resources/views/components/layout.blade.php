@@ -17,6 +17,7 @@
                 <h1>Library Management</h1>
             </div>
             <div class="flex items-center gap-2">
+                {{-- <a href="{{route('student.edit')}}" class="hover:bg-white hover:text-black transition-all ease-in-out px-4 py-1 rounded-md">Student Profile</a> --}}
                 @auth
                 <a href="{{route('home')}}" class="hover:bg-white hover:text-black transition-all ease-in-out px-4 py-1 rounded-md">Home</a>
                     {{-- dropdown menu --}}
@@ -30,7 +31,7 @@
                             <p class="text-black pl-4 pr-8 py-2 mb-1 text-xs">{{Auth::user()->username}}</p>
                             @if (Auth::user()->role =='teacher')
                                 <a href="{{route('dashboard')}}" class="text-black hover:bg-slate-100 px-2 my-1">Dashboard</a>
-                                <a href="{{route('allot')}}" class="text-black hover:bg-slate-100 px-2 my-1">Allot</a>
+                                <a href="{{route('allot_student')}}" class="text-black hover:bg-slate-100 px-2 my-1">Allot</a>
                             @endif                            
                             <form action="{{route('logout')}}" method="POST">
                                 @csrf

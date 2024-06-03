@@ -19,7 +19,15 @@
                 @csrf
                 <div class="mb-4">
                     <label for="name">Student Name</label>
-                    <input type="text" name="name" class="w-full border-solid border p-2" placeholder="Student Name">
+                    {{-- <input type="text" name="name" class="w-full border-solid border p-2" placeholder="Student Name"> --}}
+                    <select name="name" class="w-full border-solid border p-2">
+                        @foreach ($users as $user)
+                            @if ($user->role == 'student')
+                                {{-- <option value="title"></option> --}}
+                                <option value="{{$user->username}}">{{$user->username}}</option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label for="title">Title</label>
@@ -81,25 +89,27 @@
     
     <div>
         <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8 mb-14">
-            @foreach ($student as $book)
-                <div class="border-solid border shadow-xl px-9 py-5 text-center">
-                    <img src="{{asset('storage/'. $book->image)}}" alt="{{$book->image}}" class="mx-auto h-40 w-40 object-contain">
-                    <h1 class="text-xl font-bold">{{$book->title}}</h1>
-                    <h1 class="text-xl font-semibold">Alloted to {{$book->name}}</h1>
-                    <p>{{$book->author}}</p>
-                <div>
-                    <h1 class="font-bold text-lg">Status:</h1><p>{{$book->r_status}}</p>
-                </div>
-                <div class="text-center text-xs font-light mt-3">
-                    <span>Book alloted at {{$book->created_at->diffForHumans()}}</span>
-                </div>
-                <form action="{{route('student.destroy', ['student'=>$book->id])}}" method="POST" class="flex items-center justify-center mt-2">
-                    @csrf
-                    @method('DELETE')
-                    <button class="bg-red-500 text-white px-2 py-1 text-md rounded-md">Delete</button>
-                </form>
-                </div>
-            @endforeach
+                @foreach($get_books as $book)
+                    {{-- @foreach($students as $student) --}}
+                        <div class="border-solid border shadow-xl px-9 py-5 text-center">
+                            <img src="{{asset('storage/'. $book->image)}}" alt="{{$book->image}}" class="mx-auto h-40 w-40 object-contain">
+                            <h1 class="text-xl font-bold">{{$book->title}}</h1>
+                            <h1 class="text-xl font-semibold">Alloted to {{$book->user->student->name}}</h1>
+                            <p>{{$book->author}}</p>
+                        <div>
+                            <h1 class="font-bold text-lg">Status:</h1><p>{{$book->user->student->r_status}}</p>
+                        </div>
+                        <div class="text-center text-xs font-light mt-3">
+                            <span>Book alloted at {{$book->created_at->diffForHumans()}}</span>
+                        </div>
+                        <form action="{{route('student.destroy', ['student'=>$book->id])}}" method="POST" class="flex items-center justify-center mt-2">
+                            @csrf
+                            @method('DELETE')
+                            <button class="bg-red-500 text-white px-2 py-1 text-md rounded-md">Delete</button>
+                        </form>
+                        </div>    
+                    {{-- @endforeach --}}
+                @endforeach
         </div>
     </div>
 

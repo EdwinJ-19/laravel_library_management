@@ -19,19 +19,28 @@
     <div>
         <div class="mt-10">
             <h1 class="font-bold text-zinc-700 text-xl text-center mb-3">Books Alloted</h1>
-            <p class="text-center mb-4">Total Books alloted to you: {{\App\Models\User::count('id') == \App\Models\Student::count('user_id')}}</p>    
+            <p class="text-center mb-4">Total Books alloted to you: {{\App\Models\Student::count()}}</p>    
         </div>
 
         <div class="grid grid-cols-3 gap-5 justify-center mx-52 mt-8">
-            @foreach ($student_books as $book)
-            <div class="mx-auto text-center">
-                <img src="{{asset('storage/'.$book->image)}}" alt="{{$book->title}}" class="mx-auto h-40 w-40 object-contain">
-                <h1 class="text-xl font-bold">{{$book->title}}</h1>
-                <p class="text-md font-semibold">Alloted to {{$book->name}}</p>
-                <p>{{$book->author}}</p>
-                <p><span class="font-semibold text-lg">Status:- {{$book->r_status}}</span></p>
-            </div>
-        @endforeach
+            {{-- <form action="{{route('allot_student')}}" method="POST"> --}}
+                {{-- @foreach ($student as $student) --}}
+                    @foreach ($books as $book)
+                        <div class="mx-auto text-center">
+                            <img src="{{asset('storage/'.$book->image)}}" alt="{{$book->title}}" class="mx-auto h-40 w-40 object-contain">
+                            <h1 class="text-xl font-bold">{{$book->title}}</h1>
+                            <p class="text-md font-semibold">Alloted to 
+                                @if ($book->user->name == null)
+                                    {{$book->user->name}}
+                                @endif
+                                {{-- {{$book->user->username}} --}}
+                            </p>
+                            <p>{{$book->author}}</p>
+                            <p><span class="font-semibold text-lg">Status:- {{$book->user->student->r_status}}</span></p>
+                        </div>                    
+                    {{-- @endforeach --}}
+                @endforeach
+            {{-- </form> --}}
         </div>
     </div>
 </x-layout>
